@@ -1,5 +1,12 @@
 /*
-  Insertion Sort goes up the array sorting one element at a time behind it.
+  Insertion Sort:
+
+  Take current element, insert it at correct position, move other elements as needed.
+
+  Best: O(n)
+  Average: O(n^2)
+  Worst: O(n^2)
+
 */
 
 class InsertionSort {
