@@ -16,16 +16,16 @@ class InsertionSort {
 		}
 	}
 
-	private static void recursiveSort (int arr[], int n) {
-		if (n < arr.length && n > 0) {
-			recursiveSort (arr, n+1);
-			int j = n;
+	private static void recursiveSort (int arr[], int i) {
+		if (i < arr.length && i > 0) {
+			int j = i;
 			while (j > 0 && arr[j-1] > arr[j]) {
 				int swap = arr[j];
 				arr[j] = arr[j-1];
 				arr[j-1] = swap;
 				j--;
 			}
+			recursiveSort (arr, i+1);
 		}
 	}
 
