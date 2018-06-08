@@ -11,7 +11,7 @@
 
 class SelectionSort {
 
-	public static void iterativeSort (int arr[]) {
+	private static void iterativeSort (int arr[]) {
 		for (int i = 0; i < arr.length; i++) {
 			int minIdx = i;
 			for (int j = i +1; j < arr.length; j++) {
@@ -41,7 +41,15 @@ class SelectionSort {
 		}
 	}
 
-	public static void recursiveSort (int arr[]) {
+	private static void recursiveSort (int arr[]) {
 		recursiveSort (arr, 0);
+	}
+
+	public static void sort (int arr[], SortMethod method) {
+		if (method == SortMethod.ITERATE) {
+			iterativeSort (arr);
+		} else if (method == SortMethod.RECURSE) {
+			recursiveSort (arr);
+		}
 	}
 }

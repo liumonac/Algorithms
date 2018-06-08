@@ -35,17 +35,9 @@ class Sort {
 		System.out.println ("Sort using " + method.getName() + " " + type.getName() + ":");
 
 		if (type == SortType.INSERT) {
-			if (method == SortMethod.RECURSE) {
-				InsertionSort.recursiveSort (arr);
-			} else if (method == SortMethod.ITERATE) {
-				InsertionSort.iterativeSort (arr);
-			} 
+			InsertionSort.sort (arr, method);
 		} else if (type == SortType.SELECT) {
-			if (method == SortMethod.RECURSE) {
-				InsertionSort.recursiveSort (arr);
-			} else if (method == SortMethod.ITERATE) {
-				InsertionSort.iterativeSort (arr);
-			}
+			SelectionSort.sort (arr, method);
 		}
 
 		printArray (arr);
@@ -64,91 +56,73 @@ class Sort {
 
 	public static void main (String args[]) {
 		int defaultArr[] = {9,2,5,3,1,8,7,6,4};
+
+		SortType pickType = SortType.NONE;
+		SortMethod pickMethod = SortMethod.NONE;
+
+		if (args.length >= 1) {
+			pickType = SortType.getType (args[0]);
+			if (args.length >= 2) {
+				pickMethod = SortMethod.getMethod (args[1]);
+			}
+		}
+
 		/*
-			Defaul Cases:
+			Defaul Case:
 			Sort
-			Sort --i
-			Sort --i --i
 		*/
-		if (    args.length == 0
-			 || (args.length == 1 && args[0].equals("--i"))
-			 || (args.length == 2 && args[0].equals("--i") && args[1].equals("--i"))
-		   ) {
+		if (args.length == 0) {
 			sort (defaultArr, SortType.INSERT, SortMethod.ITERATE);
+		}
 		/*
 			Cases:
 			Sort --help
+			Sort --i
 			Sort --s
 		*/
-		} else if (args.length == 1) {
-			if (args[0].equals ("--help")) {
+		else if (args.length == 1) {
+			if (pickType == SortType.NONE) {
 				printUsage();
-			} else if (args[0].equals("--s")) {
-				sort (defaultArr, SortType.SELECT, SortMethod.ITERATE);
 			} else {
-				printUsage();
+				sort (defaultArr, pickType, SortMethod.ITERATE);
 			}
-	    /* 
-	        Cases:
-	        Sort --i --r
-	        Sort --i [x,y,z]
+		}
+		/*
+			Cases:
+			Sort --i --i
+			Sort --i --r
+			Sort --i [x,y,z]
 
-	    */
-	    } else if (args.length == 2) {
-	        if (args[0].equals ("--i")) {
-	        	//insert
-				if (args[1].equals ("--r")) {
-					sort (defaultArr, SortType.INSERT, SortMethod.RECURSE);
-				} else if (!args[1].contains ("--")) {
+			Sort --s --i
+			Sort --s --r
+			Sort --s [x,y,z]
+		*/
+		else if (args.length == 2) {
+			if (pickType == SortType.NONE) {
+				printUsage();
+			} else {
+				if (pickMethod == SortMethod.NONE) {
 					int arr[] = convertStringArr (args[1]);
-					sort (arr, SortType.INSERT, SortMethod.ITERATE);
+					sort (arr, pickType, SortMethod.ITERATE);
 				} else {
-					printUsage();
+					sort (defaultArr, pickType, pickMethod);
 				}
-		    /* 
-		        Cases:
-		        Sort --s --r
-		        Sort --s --i
-		        Sort --s [x,y,z]
-		    */
-	        } else if (args[0].equals ("--s")) {
-	        	//select
-				if (args[1].equals ("--r")) {
-					sort (defaultArr, SortType.SELECT, SortMethod.RECURSE);
-				} else if (args[1].equals ("--i")) {
-					sort (defaultArr, SortType.SELECT, SortMethod.ITERATE);
-				} else {
-					int arr[] = convertStringArr (args[1]);
-					sort (arr, SortType.SELECT, SortMethod.ITERATE);
-				}
-	        } else {
-	        	printUsage();
-	        }
-	    /* 
-	        Cases:
-	        Sort --i --i [x,y,z]
-	        Sort --i --r [x,y,z]
-	        Sort --s --i [x,y,z]
-	        Sort --s --r [x,y,z]
-
-	    */
-		} else if (args.length == 3) {
+			}
+		}
+		/*
+			Cases:
+			Sort --i --i [x,y,z]
+			Sort --i --r [x,y,z]
+			Sort --s --i [x,y,z]
+			Sort --s --r [x,y,z]
+		*/
+		else if (args.length == 3) {
 			int arr[] = convertStringArr (args[2]);
 
-			if (args[0].equals ("--i")) {
-				if (args[1].equals ("--i")) {
-					sort (arr, SortType.INSERT, SortMethod.ITERATE);
-				} else if (args[1].equals ("--r")) {
-					sort (arr, SortType.INSERT, SortMethod.RECURSE);
-				}
-			} else if (args[0].equals ("--s")) {
-				if (args[1].equals ("--i")) {
-					sort (arr, SortType.SELECT, SortMethod.ITERATE);
-				} else if (args[1].equals ("--r")) {
-					sort (arr, SortType.SELECT, SortMethod.RECURSE);
-				}
-			} else {
+			if (pickMethod == SortMethod.NONE || pickType == SortType.NONE) {
 				printUsage();
+			} else {
+				sort (arr, pickType, pickMethod);
 			}
 		} else {
 			printUsage();

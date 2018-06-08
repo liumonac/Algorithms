@@ -11,7 +11,7 @@
 
 class InsertionSort {
 
-	public static void iterativeSort (int arr[]) {
+	private static void iterativeSort (int arr[]) {
 		for (int i = 1; i < arr.length; i++) {
 			int j = i;
 			while (j > 0 && arr[j-1] > arr[j]) {
@@ -36,7 +36,15 @@ class InsertionSort {
 		}
 	}
 
-	public static void recursiveSort (int arr[]) {
+	private static void recursiveSort (int arr[]) {
 		recursiveSort (arr, 1);
+	}
+
+	public static void sort (int arr[], SortMethod method) {
+		if (method == SortMethod.ITERATE) {
+			iterativeSort (arr);
+		} else if (method == SortMethod.RECURSE) {
+			recursiveSort (arr);
+		}
 	}
 }
