@@ -3,9 +3,13 @@
 
   Take current element, insert it at correct position, move other elements as needed.
 
-  Best: O(n)
-  Average: O(n^2)
-  Worst: O(n^2)
+  Time Complexity:
+	Best: O(n)
+	Average: O(n^2)
+	Worst: O(n^2)
+
+  Space Complexity:
+	O(1)
 
 */
 
