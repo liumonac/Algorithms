@@ -1,6 +1,7 @@
 public class SortType {
 	public static final SortType INSERT = new SortType (0, "Insertion");
-	public static final SortType SELECT = new SortType (0, "Selection");
+	public static final SortType SELECT = new SortType (1, "Selection");
+	public static final SortType MERGE = new SortType (2, "Merge");	
 
 	public static final SortType NONE = new SortType (-1, "None");
 
@@ -21,8 +22,10 @@ public class SortType {
 			return INSERT;
 		} else if (option.equals ("--s")) {
 			return SELECT;
-		} else {
-			return NONE;
+		} else if (option.equals ("--m")) {
+			return MERGE;			
 		}
+		
+		return NONE;
 	}
 }

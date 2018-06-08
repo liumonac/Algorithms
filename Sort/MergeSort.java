@@ -15,11 +15,7 @@
 
 class MergeSort {
 
-	private static void iterativeSort (int arr[]) {
-		System.out.println ("not implemented.");
-	}
-
-	private static void topDownMerge (int arr[], int left, int middle, int right) {
+	private static void merge (int arr[], int left, int middle, int right) {
 		//create arrays
 		int leftArr[] = new int [middle - left];
 		int rightArr[] = new int [right - middle];
@@ -60,6 +56,18 @@ class MergeSort {
 		}
 	}
 
+	private static void iterativeSort (int arr[]) {
+		//bottom up
+		for (int size = 1; size < arr.length; size = 2 * size) {
+			for (int left = 0; left < arr.length - 1; left +=2 * size) {
+				int middle = left + size;
+				int right = Math.min (left + 2 * size, arr.length);
+
+				merge (arr, left, middle, right);
+			}
+		}
+	}
+
 	private static void topDownSort (int arr[], int left, int right) {
 		//1 element is sorted
 		if (right - left > 1 ) {
@@ -68,7 +76,7 @@ class MergeSort {
 			topDownSort (arr, left, middle);
 			topDownSort (arr, middle, right);
 
-			topDownMerge (arr, left, middle, right);
+			merge (arr, left, middle, right);
 		}
 	}
 

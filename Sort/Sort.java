@@ -20,8 +20,9 @@ class Sort {
 		System.out.println ("Sort --option1 --option2 [optional_input]");
 		System.out.println ("  Options1:");
 		System.out.println ("    --help    Show this screen");
-		System.out.println ("    --i       Insertion (default)");
-		System.out.println ("    --s       Selection");
+		System.out.println ("    --i       Insertion Sort (default)");
+		System.out.println ("    --s       Selection Sort");
+		System.out.println ("    --m       Merge Sort");
 
 		System.out.println ("  Options2:");
 		System.out.println ("    --i       Iterative (default)");
@@ -32,12 +33,14 @@ class Sort {
 		System.out.println ("Original Array:");
 		printArray (arr);
 
-		System.out.println ("Sort using " + method.getName() + " " + type.getName() + ":");
+		System.out.println ("Sort using " + method.getName() + " " + type.getName() + " Sort:");
 
 		if (type == SortType.INSERT) {
 			InsertionSort.sort (arr, method);
 		} else if (type == SortType.SELECT) {
 			SelectionSort.sort (arr, method);
+		} else if (type == SortType.MERGE) {
+			MergeSort.sort (arr, method);
 		}
 
 		printArray (arr);
