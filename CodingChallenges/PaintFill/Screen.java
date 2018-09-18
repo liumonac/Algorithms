@@ -22,6 +22,10 @@ public class Screen {
 		this.screen = screen;
 	}
 
+	public getColor (int x, int y) {
+		return screen[x][y];
+	}
+
 	private boolean isValidFill (int x, int y, int clickedColor) {
 		if (x < 0 || y < 0) {
 			return false;
@@ -96,5 +100,26 @@ public class Screen {
 			}
 			System.out.print ("\n");
 		}
+	}
+
+	public boolean equals (int[][] arr) {
+
+		if (arr.length != screen.length) {
+			return false;
+		}
+
+		if (arr[0].length != screen[0].length) {
+			return false;
+		}
+
+		for (int i = 0; i <screen.length; i++) {
+			for (int j = 0; j < screen[0].length; j++) {
+				if (screen[i][j] != arr[i][j]) {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 }
